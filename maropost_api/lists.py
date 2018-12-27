@@ -40,3 +40,17 @@ class MaropostList(MaropostBase):
     def delete(self, list_id):
         response = self.browser.delete('/lists/{}.json'.format(list_id))
         return self.validator(response).validate()
+
+    def contacts(self, list_id):
+        page = 1
+        total_pages = 2
+        while page < total_pages:
+            result = self.get_contacts_from_page(list_id, page)
+            if result:
+                total_pages = result[0].get('total_pages') + 1
+            page += 1
+            yield result
+
+    def get_contacts_from_page(self, list_id, page=1):
+        response = self.browser.get('/lists/{}/contacts.json'.format(list_id), params={'page': page})
+        return self.validator(response).validate()
