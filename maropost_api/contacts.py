@@ -24,7 +24,7 @@ class MaropostContact(MaropostBase):
         return self.validator(response).validate()
 
     def find_by_email(self, email):
-        response = self.browser.get('/contacts/email.json?contact[email]={}'.format(email))
+        response = self.browser.get('/contacts/email.json?contact[email]={}'.format(email.replace('+', '%2B')))
         return self.validator(response).validate()
 
     def subscribe_to_list(self, list_ids, data):
