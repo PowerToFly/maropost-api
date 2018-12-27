@@ -15,8 +15,8 @@ class MaropostContact(MaropostBase):
         response = self.browser.post('/lists/{}/contacts.json'.format(list_id), data, **kwargs)
         return self.validator(response).validate()
 
-    def remove_from_list(self, contact_id, list_id, data, **kwargs):
-        response = self.browser.delete('/lists/{}/contacts/{}.json'.format(list_id, contact_id), data, **kwargs)
+    def remove_from_list(self, contact_id, list_id, **kwargs):
+        response = self.browser.delete('/lists/{}/contacts/{}.json'.format(list_id, contact_id), **kwargs)
         return self.validator(response).validate()
 
     def find_by_email(self, email):
