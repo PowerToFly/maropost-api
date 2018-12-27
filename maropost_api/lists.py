@@ -21,6 +21,10 @@ class MaropostList(MaropostBase):
         response = self.browser.get('/lists/{}.json'.format(list_id))
         return self.validator(response).validate()
 
+    def refresh(self, list_id):
+        response = self.browser.get('/lists/{}/refresh_count.json'.format(list_id))
+        return self.validator(response).validate()
+
     def create(self, data):
         response = self.browser.post('/lists.json', data)
         return self.validator(response).validate()
