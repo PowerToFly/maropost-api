@@ -32,7 +32,7 @@ class MaropostDoNotMailList(MaropostBase):
         return self.validator(response).validate()
 
     def find_by_email(self, email):
-        response = self.browser.get('/global_unsubscribes/email.json?email={}'.format(email.replace('+', '%2B')))
+        response = self.browser.get('/global_unsubscribes/email.json?contact[email]={}'.format(email.replace('+', '%2B')))
         return self.validator(response).validate()
 
     def find_by_uid(self, uid):
