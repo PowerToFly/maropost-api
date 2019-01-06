@@ -28,9 +28,9 @@ class MaropostContact(MaropostBase):
         return self.validator(response).validate()
 
     def subscribe_to_list(self, list_ids, data):
-      response = self.browser.post('/contacts.json?list_ids={}'.format(','.join(list_ids)), data)
-      return self.validator(response).validate()
+        response = self.browser.post('/contacts.json?list_ids={}'.format(','.join(list_ids)), data)
+        return self.validator(response).validate()
 
     def unsubscribe_from_list(self, contact_id, list_ids, data=None):
-      response = self.browser.delete('/contacts/{}.json?list_ids={}'.format(contact_id, ','.join(list_ids)), data)
-      return self.validator(response).validate()
+        response = self.browser.delete('/contacts/{}.json?list_ids={}'.format(contact_id, ','.join(list_ids)), data)
+        return self.validator(response).validate()
