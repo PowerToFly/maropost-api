@@ -7,6 +7,7 @@ BAD_REQUEST = 400
 UNAUTHORIZED = 401
 NOT_FOUND = 404
 METHOD_NOT_ALLOWED = 405
+UNPROCESSABLE_ENTITY = 422
 REQUEST_LIMIT_EXCEED = 429
 
 APPLICATION_ERROR = 500
@@ -39,10 +40,15 @@ class NotFound(HttpError):
 
 
 class RequestLimitExceed(HttpError):
-    status = NOT_FOUND
-    msg = "Resource not found."
+    status = REQUEST_LIMIT_EXCEED
+    msg = "Request limit exceeded."
 
 
 class MethodNotAllowed(HttpError):
     status = METHOD_NOT_ALLOWED
     msg = "The specified HTTP method is not allowed."
+
+
+class UnProcessableEntity(HttpError):
+    status = UNPROCESSABLE_ENTITY
+    msg = "Unprocessable entity"
