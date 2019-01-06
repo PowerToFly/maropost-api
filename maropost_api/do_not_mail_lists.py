@@ -7,7 +7,7 @@ class MaropostDoNotMailList(MaropostBase):
         page = 1
         total_pages = 2
         while page < total_pages:
-            result = self.get_contacts_from_page(page)
+            result = self.get_info_from_page(page)
             if result:
                 total_pages = result[0].get('total_pages') + 1
             page += 1
