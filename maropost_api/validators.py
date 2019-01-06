@@ -1,7 +1,7 @@
 from .exceptions import (APPLICATION_ERROR, BAD_REQUEST, BadRequest, HttpError,
                          METHOD_NOT_ALLOWED, MethodNotAllowed, NOT_FOUND,
                          NotFound, REQUEST_LIMIT_EXCEED, RequestLimitExceed,
-                         UNAUTHORIZED, Unauthorized)
+                         UNAUTHORIZED, Unauthorized, UNPROCESSABLE_ENTITY, UnProcessableEntity)
 
 
 class MaropostValidator(object):
@@ -34,4 +34,6 @@ class MaropostValidator(object):
             raise HttpError(error_message)
         elif status_code == UNAUTHORIZED:
             raise Unauthorized(error_message)
+        elif status_code == UNPROCESSABLE_ENTITY:
+            raise UnProcessableEntity()
         return data
