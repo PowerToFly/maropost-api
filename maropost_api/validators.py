@@ -19,6 +19,9 @@ class MaropostValidator(object):
             data = self.response.json()
         except:
             pass
+
+        if isinstance(data, dict) and data.get('status'):
+            status_code = data.get('status')
         error_message = None
         if status_code < 200 or status_code > 299:
             error_message = data.get('message') if data else None
