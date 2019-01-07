@@ -88,6 +88,14 @@ class MaropostBrandDoNotMailList(MaropostBase):
         response = self.browser.post('/brand_unsubscribes.json', data=data, **kwargs)
         return self.validator(response).validate()
 
+    def unsubscribe_contact_by_email(self, email, brand_id):
+        data = dict(brand_unsubscribe=dict(email=email, brand_id=brand_id))
+        return self.unsubscribe_contact(data)
+
+    def unsubscribe_contact_by_uid(self, uid, brand_id):
+        data = dict(brand_unsubscribe=dict(uid=uid, brand_id=brand_id))
+        return self.unsubscribe_contact(data)
+
     def find_by_email(self, email):
         response = self.browser.get('/brand_unsubscribes/email.json?email={}'.format(email.replace('+', '%2B')))
         return self.validator(response).validate()
@@ -98,4 +106,8 @@ class MaropostBrandDoNotMailList(MaropostBase):
 
     def delete_by_email_from_brand(self, email, brand_name):
         response = self.browser.delete('/brand_unsubscribes/delete.json?email={}&brand={}'.format(email.replace('+', '%2B'), brand_name))
+        return self.validator(response).validate()
+
+    def delete_by_email_brand_id_from_brand(self, email, brand_id):
+        response = self.browser.delete('/brand_unsubscribes/delete.json?email={}&brand_id={}'.format(email.replace('+', '%2B'), brand_id))
         return self.validator(response).validate()
