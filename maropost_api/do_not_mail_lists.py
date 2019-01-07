@@ -31,6 +31,14 @@ class MaropostDoNotMailList(MaropostBase):
         response = self.browser.post('/global_unsubscribes.json', data=data, **kwargs)
         return self.validator(response).validate()
 
+    def unsubscribe_contact_by_email(self, email):
+        data = dict(global_unsubscribe=dict(email=email))
+        return self.unsubscribe_contact(data)
+
+    def unsubscribe_contact_by_uid(self, uid):
+        data = dict(global_unsubscribe=dict(uid=uid))
+        return self.unsubscribe_contact(data)
+
     def find_by_email(self, email):
         response = self.browser.get('/global_unsubscribes/email.json?contact[email]={}'.format(email.replace('+', '%2B')))
         return self.validator(response).validate()
