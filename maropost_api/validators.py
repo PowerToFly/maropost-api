@@ -25,6 +25,8 @@ class MaropostValidator(object):
         error_message = None
         if status_code < 200 or status_code > 299:
             error_message = data.get('message') if data else None
+            if not error_message and data and 'base' in data and isinstance(data['base'], list):
+                error_message = ';'.join(data['base'])
         if status_code == BAD_REQUEST:
             raise BadRequest(error_message)
         elif status_code == NOT_FOUND:
@@ -38,5 +40,5 @@ class MaropostValidator(object):
         elif status_code == UNAUTHORIZED:
             raise Unauthorized(error_message)
         elif status_code == UNPROCESSABLE_ENTITY:
-            raise UnProcessableEntity()
+            raise UnProcessableEntity(error_message)
         return data
