@@ -27,10 +27,10 @@ class MaropostContact(MaropostBase):
         response = self.browser.get('/contacts/email.json?contact[email]={}'.format(email.replace('+', '%2B')))
         return self.validator(response).validate()
 
-    def subscribe_to_list(self, list_ids, data):
-        response = self.browser.post('/contacts.json?list_ids={}'.format(','.join(list_ids)), data)
+    def subscribe_to_lists(self, contact_id, list_ids):
+        response = self.browser.post('/contacts/{}.json?list_ids={}'.format(contact_id, ','.join(list_ids)))
         return self.validator(response).validate()
 
-    def unsubscribe_from_list(self, contact_id, list_ids, data=None):
-        response = self.browser.delete('/contacts/{}.json?list_ids={}'.format(contact_id, ','.join(list_ids)), data)
+    def unsubscribe_from_lists(self, contact_id, list_ids):
+        response = self.browser.delete('/contacts/{}.json?list_ids={}'.format(contact_id, ','.join(list_ids)))
         return self.validator(response).validate()

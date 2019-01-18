@@ -111,3 +111,7 @@ class MaropostBrandDoNotMailList(MaropostBase):
     def delete_by_email_brand_id_from_brand(self, email, brand_id):
         response = self.browser.delete('/brand_unsubscribes/delete.json?email={}&brand_id={}'.format(email.replace('+', '%2B'), brand_id))
         return self.validator(response).validate()
+
+    def delete_by_email_from_all_brands(self, email):
+        response = self.browser.delete('/brand_unsubscribes/delete.json?email={}'.format(email.replace('+', '%2B')))
+        return self.validator(response).validate()
