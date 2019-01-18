@@ -13,8 +13,8 @@ class MaropostList(MaropostBase):
             page += 1
             yield result
 
-    def get_lists_from_page(self, page=1):
-        response = self.browser.get('/lists.json', params={'page': page})
+    def get_lists_from_page(self, page=1, no_counts=True):
+        response = self.browser.get('/lists.json', params={'page': page, 'no_counts':no_counts})
         return self.validator(response).validate()
 
     def get(self, list_id):
