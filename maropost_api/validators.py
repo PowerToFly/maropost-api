@@ -21,7 +21,7 @@ class MaropostValidator(object):
             pass
         error_message = None
 
-        if isinstance(data, dict) and data.get('status') and data.get('status').isdigit():
+        if isinstance(data, dict) and data.get('status') and (isinstance(data.get('status'), int) or data.get('status').isdigit()):
             status_code = int(data.get('status'))
 
         if status_code < 200 or status_code > 299:
