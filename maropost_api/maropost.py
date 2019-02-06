@@ -3,6 +3,7 @@ from browsers import MaropostBrowser
 from contacts import MaropostContact
 from lists import MaropostList
 from do_not_mail_lists import MaropostBrandDoNotMailList, MaropostDoNotMailList
+from reports import MaropostReport
 from validators import MaropostValidator
 
 
@@ -30,3 +31,8 @@ class Maropost(object):
     def do_not_mail_list(self):
         """:rtype MaropostDoNotMailList"""
         return MaropostDoNotMailList(self.browser, self.validator)
+
+    @property
+    def reports(self):
+        """:rtype MaropostReport"""
+        return MaropostReport(self.browser, self.validator)
