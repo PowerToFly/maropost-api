@@ -1,5 +1,6 @@
 import requests
 import json
+from time import sleep
 
 
 class MaropostBrowser(object):
@@ -33,5 +34,21 @@ class MaropostBrowser(object):
                 kwargs['params'].update({'auth_token': self.auth_token})
             else:
                 kwargs['params'] = {'auth_token': self.auth_token}
-            return requests.request(upper_name, self.make_uri(endpoint), **kwargs)
+            return MaropostBrowser.call_api(upper_name, self.make_uri(endpoint), **kwargs)
         return f
+
+    @staticmethod
+    def call_api(upper_name, endpoint, **kwargs):
+        """API functions call wrapper for catch random HTTP error on Maropost,
+        in case of 500 error, API call will be repeated 2 times with small delay
+        """
+        def f(method_name, api_endpoint, **fkwargs):
+            response = requests.request(method_name, api_endpoint, **fkwargs)
+            if response.status_code == 500:
+                if f.__dict__.get('num_of_attempts', 1) < 3:
+                    # little bit delay before next call
+                    sleep((100 / 1000) * f.__dict__.get('num_of_attempts', 1))
+                    f.num_of_attempts = f.__dict__.get('num_of_attempts', 1) + 1
+                    return f(method_name, api_endpoint, **fkwargs)
+            return response
+        return f(upper_name, endpoint, **kwargs)
