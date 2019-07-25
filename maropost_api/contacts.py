@@ -11,6 +11,10 @@ class MaropostContact(MaropostBase):
         response = self.browser.put('/contacts/{}.json'.format(contact_id), data)
         return self.validator(response).validate()
 
+    def delete(self, email):
+        response = self.browser.delete('/contacts/delete_all.json?contact[email]={}'.format(email))
+        return self.validator(response).validate()
+
     def add_to_list(self, list_id, data, **kwargs):
         response = self.browser.post('/lists/{}/contacts.json'.format(list_id), data, **kwargs)
         return self.validator(response).validate()
