@@ -1,4 +1,4 @@
-from base import MaropostBase
+from .base import MaropostBase
 
 
 class MaropostDoNotMailList(MaropostBase):

@@ -1,10 +1,10 @@
 from cached_property import cached_property
-from browsers import MaropostBrowser
-from contacts import MaropostContact
-from lists import MaropostList
-from do_not_mail_lists import MaropostBrandDoNotMailList, MaropostDoNotMailList
-from reports import MaropostReport
-from validators import MaropostValidator
+from .browsers import MaropostBrowser
+from .contacts import MaropostContact
+from .lists import MaropostList
+from .do_not_mail_lists import MaropostBrandDoNotMailList, MaropostDoNotMailList
+from .reports import MaropostReport
+from .validators import MaropostValidator
 
 
 class Maropost(object):
