@@ -35,6 +35,10 @@ class MaropostContact(MaropostBase):
         response = self.browser.get('/contacts/email.json?contact[email]={}'.format(email.replace('+', '%2B')))
         return self.validator(response).validate()
 
+    def find_by_id(self, id):
+        response = self.browser.get('/contacts/{}.json'.format(id))
+        return self.validator(response).validate()
+
     def subscribe_to_lists(self, list_ids, data):
         response = self.browser.post('/contacts.json?list_ids={}'.format(','.join(list_ids)), data)
         return self.validator(response).validate()

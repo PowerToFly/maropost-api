@@ -2,6 +2,7 @@ from cached_property import cached_property
 from browsers import MaropostBrowser
 from contacts import MaropostContact
 from lists import MaropostList
+from journeys import MaropostJourney
 from do_not_mail_lists import MaropostBrandDoNotMailList, MaropostDoNotMailList
 from reports import MaropostReport
 from validators import MaropostValidator
@@ -36,3 +37,8 @@ class Maropost(object):
     def reports(self):
         """:rtype MaropostReport"""
         return MaropostReport(self.browser, self.validator)
+
+    @cached_property
+    def journeys(self):
+        """:rtype MaropostContact"""
+        return MaropostJourney(self.browser, self.validator)

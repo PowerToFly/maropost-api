@@ -1,4 +1,4 @@
-from .exceptions import (APPLICATION_ERROR, BAD_REQUEST, BadRequest, HttpError,
+from exceptions import (APPLICATION_ERROR, BAD_REQUEST, BadRequest, HttpError,
                          METHOD_NOT_ALLOWED, MethodNotAllowed, NOT_FOUND,
                          NotFound, REQUEST_LIMIT_EXCEED, RequestLimitExceed,
                          UNAUTHORIZED, Unauthorized, UNPROCESSABLE_ENTITY, UnProcessableEntity)
