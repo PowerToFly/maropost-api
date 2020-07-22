@@ -4,14 +4,7 @@ from base import MaropostBase
 class MaropostList(MaropostBase):
 
     def all(self):
-        page = 1
-        total_pages = 2
-        while page < total_pages:
-            result = self.get_lists_from_page(page)
-            if result:
-                total_pages = result[0].get('total_pages') + 1
-            page += 1
-            yield result
+        return self.pagination(self.get_lists_from_page)
 
     def get_lists_from_page(self, page=1, no_counts=True):
         response = self.browser.get('/lists.json', params={'page': page, 'no_counts':no_counts})
@@ -42,14 +35,7 @@ class MaropostList(MaropostBase):
         return self.validator(response).validate()
 
     def contacts(self, list_id):
-        page = 1
-        total_pages = 2
-        while page < total_pages:
-            result = self.get_contacts_from_page(list_id, page)
-            if result:
-                total_pages = result[0].get('total_pages') + 1
-            page += 1
-            yield result
+        return self.pagination(self.get_contacts_from_page, list_id=list_id)
 
     def get_contacts_from_page(self, list_id, page=1):
         response = self.browser.get('/lists/{}/contacts.json'.format(list_id), params={'page': page})

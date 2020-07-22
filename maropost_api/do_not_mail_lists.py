@@ -4,14 +4,7 @@ from base import MaropostBase
 class MaropostDoNotMailList(MaropostBase):
 
     def all_info(self):
-        page = 1
-        total_pages = 2
-        while page < total_pages:
-            result = self.get_info_from_page(page)
-            if result:
-                total_pages = result[0].get('total_pages') + 1
-            page += 1
-            yield result
+        return self.pagination(self.get_info_from_page)
 
     def get_info_from_page(self, page=1):
         response = self.browser.get('/global_unsubscribes/list.json', params={'page': page})
@@ -59,14 +52,7 @@ class MaropostDoNotMailList(MaropostBase):
 class MaropostBrandDoNotMailList(MaropostBase):
 
     def all_info(self):
-        page = 1
-        total_pages = 2
-        while page < total_pages:
-            result = self.get_contacts_from_page(page)
-            if result:
-                total_pages = result[0].get('total_pages') + 1
-            page += 1
-            yield result
+        return self.pagination(self.get_info_from_page)
 
     def get_info_from_page(self, page=1):
         response = self.browser.get('/brand_unsubscribes.json', params={'page': page})
