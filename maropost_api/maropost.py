@@ -39,6 +39,6 @@ class Maropost(object):
         return MaropostReport(self.browser, self.validator)
 
     @cached_property
-    def journeys(self):
-        """:rtype MaropostContact"""
+    def journeys(self) -> MaropostJourney:
+        """:rtype MaropostJourney"""
         return MaropostJourney(self.browser, self.validator)
