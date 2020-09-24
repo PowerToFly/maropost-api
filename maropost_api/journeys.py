@@ -28,3 +28,7 @@ class MaropostJourney(MaropostBase):
     def stop_journey_for_contact_by_id(self, journey_id, contact_id):
         response = self.browser.put('/journeys/{}/stop/{}.json'.format(journey_id, contact_id))
         return self.validator(response).validate()
+
+    def start_journey_for_contact_by_id(self, journey_id, contact_id):
+        response = self.browser.put('/journeys/{}/start/{}.json'.format(journey_id, contact_id))
+        return self.validator(response).validate()
